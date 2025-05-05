@@ -1,31 +1,37 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect, useContext } from 'react';
+import { useAuth } from './AuthContext';
 
 export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
-  const [cartItems, setCartItems] = useState(() => {
-    const savedCart = localStorage.getItem('cartItems');
-    return savedCart ? JSON.parse(savedCart) : [];
-  });
+  const { currentUser } = useAuth();
+  const [cartItems, setCartItems] = useState([]);
 
+  // Завантаження кошика при вході або оновленні сторінки
   useEffect(() => {
-    localStorage.setItem('cartItems', JSON.stringify(cartItems));
-  }, [cartItems]);
+    if (currentUser?.uid) {
+      const savedCart = localStorage.getItem(`cart_${currentUser.uid}`);
+      if (savedCart) {
+        setCartItems(JSON.parse(savedCart));
+      }
+    } else {
+      setCartItems([]); // Якщо вийшли, кошик пустий
+    }
+  }, [currentUser]); // Залежність від currentUser
+
+  // Збереження кошика при змінах (з затримкою)
+  useEffect(() => {
+    if (currentUser?.uid && cartItems.length !== 0) {
+      localStorage.setItem(`cart_${currentUser.uid}`, JSON.stringify(cartItems));
+    }
+  }, [cartItems, currentUser]);
 
   const addToCart = (product) => {
-    setCartItems(prevItems => [...prevItems, product]);
+    setCartItems((prevItems) => [...prevItems, product]);
   };
 
   const removeFromCart = (id) => {
-    setCartItems(prevItems => {
-      const itemIndex = prevItems.findIndex(item => item.id === id);
-      if (itemIndex !== -1) {
-        const newCart = [...prevItems];
-        newCart.splice(itemIndex, 1); // видаляємо тільки одну штуку за індексом
-        return newCart;
-      }
-      return prevItems;
-    });
+    setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
   };
 
   const clearCart = () => {

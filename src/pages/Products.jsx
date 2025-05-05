@@ -17,18 +17,18 @@ import product11Image from '../assets/images/products/product11.png';
 import product12Image from '../assets/images/products/product12.png';
 
 const initialProducts = [
-  { image: product1Image, name: 'Running Top', price: 19, rating: 4.5 },
-  { image: product2Image, name: 'Product 2', price: 25, rating: 3.8 },
-  { image: product3Image, name: 'Product 3', price: 15, rating: 4.2 },
-  { image: product4Image, name: 'Product 4', price: 22, rating: 4.0 },
-  { image: product5Image, name: 'Product 5', price: 28, rating: 4.9 },
-  { image: product6Image, name: 'Product 6', price: 18, rating: 3.5 },
-  { image: product7Image, name: 'Product 7', price: 24, rating: 4.4 },
-  { image: product8Image, name: 'Product 8', price: 20, rating: 4.7 },
-  { image: product9Image, name: 'Product 9', price: 21, rating: 4.1 },
-  { image: product10Image, name: 'Product 10', price: 17, rating: 4.3 },
-  { image: product11Image, name: 'Product 11', price: 26, rating: 3.9 },
-  { image: product12Image, name: 'Product 12', price: 23, rating: 4.6 },
+  { id: 1, image: product1Image, name: 'Running Top', price: 19, rating: 4.5 },
+  { id: 2, image: product2Image, name: 'Training Shorts', price: 25, rating: 3.8 },
+  { id: 3, image: product3Image, name: 'Yoga Pants', price: 15, rating: 4.2 },
+  { id: 4, image: product4Image, name: 'Gym T-Shirt', price: 22, rating: 4.0 },
+  { id: 5, image: product5Image, name: 'Sports Bra', price: 28, rating: 4.9 },
+  { id: 6, image: product6Image, name: 'Running Shoes', price: 18, rating: 3.5 },
+  { id: 7, image: product7Image, name: 'Fitness Gloves', price: 24, rating: 4.4 },
+  { id: 8, image: product8Image, name: 'Workout Headband', price: 20, rating: 4.7 },
+  { id: 9, image: product9Image, name: 'Training Socks', price: 21, rating: 4.1 },
+  { id: 10, image: product10Image, name: 'Sports Bag', price: 17, rating: 4.3 },
+  { id: 11, image: product11Image, name: 'Water Bottle', price: 26, rating: 3.9 },
+  { id: 12, image: product12Image, name: 'Jump Rope', price: 23, rating: 4.6 },
 ];
 
 const Products = () => {
@@ -39,7 +39,7 @@ const Products = () => {
     const option = e.target.value;
     setSortOption(option);
 
-    let sorted = [...products];
+    let sorted = [...initialProducts];
     if (option === 'price-asc') {
       sorted.sort((a, b) => a.price - b.price);
     } else if (option === 'price-desc') {
@@ -68,11 +68,13 @@ const Products = () => {
         </div>
 
         <div className="products-cards">
-          {products.map((product, index) => (
+          {products.map((product) => (
             <ProductCard
-              key={index}
-              {...product}
-              isNew={index % 2 === 1}
+              key={product.id}
+              id={product.id}
+              name={product.name}
+              price={product.price}
+              image={product.image}
             />
           ))}
         </div>

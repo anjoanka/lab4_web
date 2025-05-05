@@ -67,6 +67,10 @@ const Profile = () => {
           <p className="personal-text">Cashback – $10 cashback available for next purchase!</p>
           <p className="personal-text">Referral Program – Refer a friend & get $15 off for both!</p>
         </div>
+        <div className="wishlist-info">
+          <p className="title">My Wishlist</p>
+          <Link to="/wishlist">View my wishlist ({wishlist.length} items)</Link>
+        </div>
       </section>
       <section id="feedback">
         <h2>Leave Your Comment</h2>

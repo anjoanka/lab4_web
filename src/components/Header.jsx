@@ -1,13 +1,15 @@
-import { useAuth } from '../context/AuthContext.jsx'; // Додано
 import { useState, useContext } from 'react';
-import { CartContext } from '../context/CartContext.jsx';
 import { Link } from 'react-router-dom';
-import MenuIcon from '../components/MenuIcon.jsx'
+import { CartContext } from '../context/CartContext';
+import { WishlistContext } from '../context/WishlistContext'; // Додаємо імпорт
+import { useAuth } from '../context/AuthContext';
+import MenuIcon from './MenuIcon';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { cartItems } = useContext(CartContext);
-  const { currentUser, logout } = useAuth(); // Додано
+  const { wishlist } = useContext(WishlistContext); // Додаємо wishlist
+  const { currentUser, logout } = useAuth();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -34,7 +36,12 @@ const Header = () => {
               <Link to="/login">Login</Link>
             )}
           </li>
-          <li><Link className='cart-icon' to="/cart">🛒 Cart ({cartItems.length})</Link></li>
+          <li>
+            <Link className='cart-icon' to="/cart">🛒 Cart ({cartItems.length})</Link>
+          </li>
+          <li>
+            {currentUser && <Link to="/wishlist">❤️ Wishlist ({wishlist.length})</Link>}
+          </li>
         </ul>
         <div className="menu-icon" onClick={toggleMenu}>
           <MenuIcon />
