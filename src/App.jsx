@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { CartProvider } from './context/CartContext';
-import { AuthProvider } from './context/AuthContext.jsx'; // Додано
+import { AuthProvider } from './context/AuthContext.jsx';
 import { WishlistProvider } from './context/WishlistContext.jsx';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
@@ -9,8 +9,8 @@ import Products from './pages/Products';
 import Promotions from './pages/Promotions';
 import About from './pages/About';
 import Cart from './pages/Cart';
-import Login from './pages/Login'; // Додано
-import Signup from './pages/Signup'; // Додано
+import Login from './pages/Login';
+import Signup from './pages/Signup'; 
 import Wishlist from './pages/WishList.jsx';
 import './App.css';
 

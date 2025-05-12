@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 
-
 const PromotionCard = ({ name, text, buttonText, buttonLink }) => {
-  // Стан для відстеження, чи текст акції видимий
   const [isTextVisible, setIsTextVisible] = useState(false);
 
   const toggleTextVisibility = (event) => {
-    event.preventDefault(); 
+    event.preventDefault();
     setIsTextVisible(!isTextVisible);
   };
 
@@ -15,7 +13,7 @@ const PromotionCard = ({ name, text, buttonText, buttonLink }) => {
       <p className="promotion-name">{name}</p>
       <p
         className="promotion-text"
-        style={{ display: isTextVisible ? 'block' : 'none' }} 
+        style={{ display: isTextVisible ? 'block' : 'none' }}
       >
         {text}
       </p>

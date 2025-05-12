@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth"; // Додано
+import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore"; // Додано
 import { getAnalytics } from "firebase/analytics";
 
 const firebaseConfig = {
@@ -13,5 +14,6 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app); // Експортуємо auth
+export const auth = getAuth(app);
+export const db = getFirestore(app); // Експортуємо Firestore
 const analytics = getAnalytics(app);
